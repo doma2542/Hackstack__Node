@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Welcome to Dashboard, <%= username %></h1>
+            <nav>
+                
+                <% if (loggedInUser) { %>
+                    <button class="btn">
+                        <a href="/profile/<%= loggedInUser.id %>">Profile</a>
+                    </button>
+                <% } %>
+                <a href="/question"><button class="btn">New Question</button></a>
+                <button id="logoutButton" class="btn">Logout</button>
+            </nav>
+        </header>
+
+        <div class="content">
+            <br>
+            <br>
+            
+            <% if (questions.length > 0) { %>
+                <% questions.forEach(question => { %>
+                    <div class="question">
+                        
+                            <h3 class="title"><%= question.title %></h3> 
+                    
+                        <p class="description"><%= question.description %></p>
+                        <p class="meta">- Posted by <%= question.postedBy.username %> on <%= question.datePosted.toLocaleDateString() %></p>
+                        <div class="box">
+                            <a href="/<%= question._id %>"><button class="btn">answer it</button></a>
+                            <a href="/<%= question._id %>/answer"><button class="btn">See all answers</button></a>
+                        </div>
+                    </div>
+                <% }) %>
+                <% } else { %>
+                    <div class="answer">
+                        <h2>No Data Yet</h2>
+                    </div>
+                <% } %>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    const logoutButton = document.getElementById('logoutButton');
+
+    logoutButton.addEventListener('click', () => {
+        fetch('/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                window.location.href = '/login'; 
+            } else {
+                throw new Error('Logout failed');
+            }
+        })
+        .catch(error => {
+            console.error('Logout error:', error);
+            // Handle error as needed
+        });
+    });
+</script>
+</html>
+
+

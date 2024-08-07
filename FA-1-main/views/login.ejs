@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="loginstyle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <iframe class="ani" src="https://lottie.host/embed/8e94bcc0-534b-46f5-bca6-8ed839d558c4/XAWAXZVWdW.json"></iframe>
+            <form class="form" action="/login" method="post">
+                <h1 class="red">Login Form</h1>
+                <input type="email" name="email" placeholder="&nbsp;&nbsp;email" required>
+                <input type="password" name="password" placeholder="&nbsp;&nbsp;password" required>
+                <input type="submit" class="btn" value="LOGIN">
+    <div class="black">not a member? &nbsp;&nbsp;&nbsp;<a href="/register">Signup</a></div>
+            </form>
+            <div class="error-message"></div>
+        </div>
+    </div>
+</body>
+<script>
+    let form = document.querySelector('.form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+
+        let formData = new FormData(form);
+        let data = {
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
+
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                let errorMessage = document.querySelector('.error-message');
+                errorMessage.innerText = data.msg;
+                errorMessage.style.display = 'block';
+            }
+            else{
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
+</script>
+</html>

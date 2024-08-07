@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Details</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/answer.css">
+</head>
+<body>
+    <div class="container">
+        <h1>All Answers</h1>
+        <div class="details content">
+            <h2 class="question-title"><%= question.title %></h2>
+            <p class="question-description"><%= question.description %></p>
+            <p class="meta">- Posted by <%= question.postedBy.username %> on <%= question.datePosted.toLocaleDateString() %></p>
+        </div>
+
+     
+        <div class="answers">
+            <h2 class="answers-title">Answers:</h2>
+            <% if (answers.length > 0) { %>
+            <% answers.forEach(answer => { %>
+                <div class="answer">
+                    <p class="answer-text"><%= answer.answerText %></p>
+                    <p class="meta">- Answered by <%= answer.postedBy.username %> on <%= answer.datePosted.toLocaleDateString() %></p>
+                </div>
+            <% }) %>
+            <% } else { %>
+                <div class="answer">
+                    <h2>No answers yet</h2>
+                </div>
+            <% } %>
+        </div>
+
+        <a href="/dashboard"><i class="fa-solid fa-arrow-left back"></i></a>
+    </div>
+</body>
+</html>

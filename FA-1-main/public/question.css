@@ -1,0 +1,95 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #2d2d2d;
+    color: #ddd;
+}
+
+
+.container {
+    width: 26%;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    scale: 1.5;
+    position: absolute;
+    right: 15vw;
+    top: 13rem;
+}
+.box{
+    background-color: rgba(0, 0, 0, 0.463);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+   
+}
+.ani{
+    left: 21%;
+    border: none;
+    margin-right: 9rem;
+    scale: 4.8;
+    position: absolute;
+    top: 40%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+}
+.form h1{
+    color: red;
+    border-bottom: 2px solid red;
+}
+
+.form-input, .form-textarea {
+    font-size: 16px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    color: black;
+}
+
+.form-input::placeholder, .form-textarea::placeholder {
+    color: #bbb;
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: #ff3b3b;
+}
+
+.submit-btn {
+    background-color: white;
+    color: red;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-transform: uppercase;
+    border-radius: 5px;
+    align-self: center;
+}
+
+.submit-btn:hover {
+    background-color: red;
+    color: white;
+    scale: 1.2;
+    transition: 0.3s ease;
+}
+.back{
+    color: white;
+    position: absolute;
+    right: 2vw;
+    scale: 2;
+    top: 3rem;
+}
+
+.back:hover{
+    scale: 1.8;
+    color: red;
+}

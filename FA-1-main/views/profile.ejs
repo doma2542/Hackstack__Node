@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="/profile.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Profile of <%= user.username %></h1>
+        </header>
+
+        <section class="questions">
+            <h2>Questions Asked</h2>
+            <% if (questions.length > 0) { %>
+                <% questions.forEach(question => { %>
+                    <div class="question">
+                        <h3><%= question.title %></h3>
+                        <p><%= question.description %></p>
+                        <p class="meta">- Posted on <%= question.datePosted.toLocaleDateString() %></p>
+                    </div>
+                <% }) %>
+                <% } else { %>
+                    <div class="answer">
+                        <h3>No Questions yet</h3>
+                    </div>
+                <% } %>
+        </section>
+
+        <section class="answers">
+            <h2>Answers Provided</h2>
+            <% if (answers.length > 0) { %>
+                <% answers.forEach(answer => { %>
+                    <div class="answer">
+                        <h3>Answered to: <%= answer.question.title %></h3>
+                        <p><%= answer.answerText %></p>
+                        <p class="meta">- Answered on <%= answer.datePosted.toLocaleDateString() %></p>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="answer">
+                    <h3>No Answers yet</h3>
+                </div>
+            <% } %>
+        </section>
+
+        <button class="btn" onclick="window.location.href='/dashboard'">Back to Dashboard</button>
+    </div>
+</body>
+</html>

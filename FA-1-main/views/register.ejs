@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="loginstyle.css">
+    <style>
+        form{
+            height: 30rem;
+            gap: 3rem;
+            margin-right: 10rem;
+        }
+        form input {
+            margin-top: -1rem;
+        }
+        .red{
+            height: 5rem;
+        }
+        .black{
+            position: absolute;
+    bottom: 8px;
+    left: 4rem;
+        }
+        .name::before{
+            content: '\f007';
+        }
+        .error-message {
+            top: 24%;
+            left: 50vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+<div class="box">
+    <iframe class="ani" src="https://lottie.host/embed/8e4fef2b-7605-489e-b4a1-28edf08fd90b/A9j69vsNIq.json"></iframe>
+    
+       
+    <form class="form" action="/register" method="post">
+        <h1 class="red">SignUp Form</h1>
+        <input type="text" name="username" class="name" placeholder="username">
+        <input type="email" name="email" placeholder="email">
+        <input type="password" name="password" placeholder="password">
+        <input type="submit" class="btn" value="sign up">
+        <div class="black">Already a member? &nbsp;&nbsp;&nbsp;<a href="/login">login</a></div>
+    </form>
+    <div class="error-message"></div>
+</div>
+</div>
+</body>
+<script>
+    let form = document.querySelector('.form');
+    form.addEventListener('submit', (e) => {
+        e.preventDefault(); 
+
+        let formData = new FormData(form);
+        let data = {
+           
+            username:formData.get('username'),
+            email: formData.get('email'),
+            password: formData.get('password')
+        };
+
+        fetch('/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success) {
+                let errorMessage = document.querySelector('.error-message');
+                errorMessage.innerText = data.msg;
+                errorMessage.style.display = 'block';
+            }
+            else{
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    });
+</script>
+</html>
+</html>
